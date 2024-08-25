@@ -4,13 +4,16 @@ import { LibraryHeader } from "../src/components/LibraryHeader";
 import { useCallback, useEffect, useState } from "react";
 import { Header } from "../src/components/Header";
 import { SongLibrary } from "../src/components/SongLibrary/SongLibrary";
+import { Song } from "../src/components/types";
 
 export default function Home() {
-  const [songs, setSongs] = useState([]);
-  const [favoriteSongs, setFavoriteSongs] = useState([]);
+  const [songs, setSongs] = useState<Song[]>([]);
+  const [favoriteSongs, setFavoriteSongs] = useState<Song[]>([]);
   const [favoriteToggle, setFavoriteToggle] = useState(false);
-  const [displayedSongs, setDisplayedSongs] = useState([]);
+  const [displayedSongs, setDisplayedSongs] = useState<Song[]>([]);
   const [showFavorites, setShowFavorites] = useState(false);
+  const [suggestions, setSuggestions] = useState<Song[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -19,7 +22,6 @@ export default function Home() {
         const data = await response.json();
         setSongs(data.songs);
         setDisplayedSongs(data.songs);
-
         localStorage.setItem("songs", JSON.stringify(data.songs));
       } catch (error) {
         console.error("Error fetching songs:", error);
@@ -28,6 +30,19 @@ export default function Home() {
 
     fetchSongs();
   }, []);
+
+  const handleSearch = (query: string) => {
+    let filteredSongs;
+    if (query.length > 0) {
+      filteredSongs = songs.filter((song) =>
+        song.song.title.toLowerCase().includes(query.toLowerCase())
+      );
+    } else {
+      filteredSongs = songs;
+    }
+    setSuggestions(filteredSongs);
+    setDisplayedSongs(filteredSongs);
+  };
 
   const onFavoriteClick = () => {
     if (favoriteToggle) {
@@ -38,7 +53,7 @@ export default function Home() {
     setFavoriteToggle((prev) => !prev);
   };
 
-  const sortSongs = useCallback((songs: any[]) => {
+  const sortSongs = useCallback((songs: Song[]) => {
     return songs
       .slice()
       .sort((a, b) => a.song.title.localeCompare(b.song.title));
@@ -52,11 +67,10 @@ export default function Home() {
     }
   };
 
-  const handleSearch = (query: string) => {
-    const filteredSongs = songs.filter((song) =>
-      song.song.title.toLowerCase().includes(query.toLowerCase())
-    );
-    setDisplayedSongs(filteredSongs);
+  const handleSuggestionClick = (song: Song) => {
+    setDisplayedSongs([song]);
+    setSearchQuery(song.song.title);
+    setSuggestions([]);
   };
 
   return (
@@ -68,10 +82,14 @@ export default function Home() {
 
       <Header />
       <LibraryHeader
+        suggestions={suggestions}
+        onSuggestionClick={handleSuggestionClick}
         onSearch={handleSearch}
         onSortToggle={handleSortToggle}
         onFavoriteClick={onFavoriteClick}
         totalSongs={songs.length}
+        setSearchQuery={setSearchQuery}
+        searchQuery={searchQuery}
         setShowFavorites={setShowFavorites}
       />
       <main>
@@ -116,7 +134,7 @@ export default function Home() {
           padding: 0.75rem;
           font-size: 1.1rem;
           font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+            DejaVu Sans Mono, Courier New, monospace;
         }
       `}</style>
 
