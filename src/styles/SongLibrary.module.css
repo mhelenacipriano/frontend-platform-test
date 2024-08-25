@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+}
+
+.songList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 100%;
+}
