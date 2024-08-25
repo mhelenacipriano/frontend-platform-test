@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  align-items: center;
+  background-color: #1c2a39;
+  padding: 20px;
+  border-radius: 10px;
+  height: 100vh;
+  width: 100vh;
+  margin: auto;
+}
+
+.albumCover {
+  margin-right: 20px;
+}
+
+.image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.details {
+  flex-grow: 1;
+  color: white;
+}
+
+.topSection {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.playButton {
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.playIcon {
+  font-size: 30px;
+  cursor: pointer;
+  color: black;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.artist {
+  font-size: 16px;
+  color: #bbb;
+}
+
+.heartIcon {
+  font-size: 24px;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.progressBarContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.progressBar {
+  flex-grow: 1;
+  height: 5px;
+  background-color: #555;
+  cursor: pointer;
+  position: relative;
+  border-radius: 3px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #4caf50;
+  border-radius: 3px;
+}
