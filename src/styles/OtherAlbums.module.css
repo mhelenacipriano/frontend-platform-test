@@ -1,0 +1,50 @@
+.container {
+  margin-top: 40px;
+}
+
+.heading {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.albumGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.albumCard {
+  background-color: #1c2a39;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.albumCard:hover {
+  transform: scale(1.05);
+}
+
+.albumImage {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.albumInfo {
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.albumTitle {
+  font-size: 16px;
+  color: white;
+  margin: 0;
+}
+
+.albumArtist {
+  font-size: 14px;
+  color: #bbb;
+  margin: 0;
+}
