@@ -1,0 +1,32 @@
+.container {
+  background-color: #1c2a39;
+  color: black; /* Ensures that text is visible against the black background */
+  min-height: 100vh; /* Ensures the container takes the full height of the viewport */
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+.returnIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1c2a39;
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.returnIcon:hover {
+  background-color: #4caf50;
+}
+
+.container a {
+  text-decoration: none;
+}
