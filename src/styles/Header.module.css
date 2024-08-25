@@ -1,0 +1,12 @@
+.header {
+  background-color: #1d1d1d;
+  height: 80px;
+  width: 100%;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+
+  .title {
+    padding: 10px;
+  }
+}
